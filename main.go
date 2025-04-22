@@ -28,7 +28,7 @@ func main() {
 
 	username := "user"
 	password := "pass"
-	host := "localhost"
+	host := "mongodb"
 	port := "27017"
 	dbName := "go-auth-user"
 
