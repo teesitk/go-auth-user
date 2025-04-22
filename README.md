@@ -1,3 +1,16 @@
+### Assumption
+This project follows the **Hexagonal Architecture** pattern:  
+**Domain Layer**: business logic for authentication, user information  
+**Service Layer**: use cases for authentication, user information  
+**Adapter Layer**:
+- HTTP (Gorilla Mux)
+- gRPC
+- MongoDB (Persistence)
+
+**Unit test**: cover just for some method in **service, adapter** mocks by `mockgen`
+
+---
+
 ### Setup Application
 `docker compose up --build`
 
