@@ -2,12 +2,29 @@
 `docker compose up --build`
 
 ### Run Test and Coverage
-`go test ./... -coverprofile=coverage.out
-go tool cover -html=coverage.out -o coverage.html`
+`go test ./... -coverprofile=coverage.out`  
+`go tool cover -html=coverage.out -o coverage.html`
 
 ### JWT token usage guide
  - retrieve access token from `localhost:8080/authenticate`
- - put access token into header with `Authorization: Bearer `
+ - put access token into header with `Authorization: Bearer <JWT_TOKEN>`
+
+### gen-go-grpc Example
+`protoc --go_out=. --go-grpc_out=. proto/user.proto`
+
+## 📘 API Endpoints
+
+| Method | Endpoint      | Description           | Auth Required | Request Body                                                                                       | Response Example                                                                                     |
+|--------|---------------|-----------------------|----------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| POST   | `/signup`     | Register a new user   | ❌ No          | `{ "name": "Alice", "email": "alice@example.com", "password": "123456" }`                          | `201 Created`                                                                                        |
+| POST   | `/authenticate`      | Get Access Token            | ❌ No          | `{ "email": "alice@example.com", "password": "123456" }`                                           | `{ "token": "eyJhbGciOi..." }`                                                                       |
+| GET    | `/user`   | Get current user info | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`  _Body_: `{id:<id>}`                                          | `{code: 201, message: "success", data:{ "id": "1", "name": "one", "email": "one@example.com" }}`                           |
+| GET    | `/users`   | Get users list | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`                                                      | `{code: 201, message: "success"}, data: [{ "id": "1", "name": "one", "email": "one@example.com" },{ "id": "2", "name": "two", "email": "two@example.com" }]}`                           |
+| POST    | `/users/create`   | Create a new user | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`   _Body_: `{ name:<name>, email:<email>, password:<password>}`                                                    | `{code: 201, message: "success"}`                           |
+| PUT    | `/users/update`   | Update user's name or email | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>  `    _Body_: `{id:<id>, name:<name>, email:<email>}`                                                    | `{code: 200, message: "success"}`                           |
+| POST    | `/users/delete`   | Create a new user | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`  _Body_: `{id:<id>}`                                                      | `{code: 200, message: "success"}`                           |
+
+---
 
 ### Sample Request
 `curl --location --request GET 'localhost:8080/users/create' \
@@ -21,10 +38,3 @@ go tool cover -html=coverage.out -o coverage.html`
 ### Sample Response
 `{"Code":200,"Message":"success"}`
 
-### gen-go-grpc Example
-`protoc --go_out=. --go-grpc_out=. proto/user.proto`
-
-Method | Endpoint | Description | Auth Required | Request Body | Response Example
-POST | /signup | Register a new user | ❌ No | { "name": "one", "email": "one@example.com", "password": "123456" } | 201 Created
-POST | /login | User login | ❌ No | { "email": "one@example.com", "password": "123456" } | { "token": "eyJhbGciOi..." }
-GET | /users/me | Get current user info | ✅ Yes | Header: Authorization: Bearer <JWT_TOKEN> | { "id": "1", "name": "one", "email": "one@example.com" }
