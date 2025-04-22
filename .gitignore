@@ -1,0 +1,52 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the go coverage tool
+*.cover
+
+# Dependency directories (remove the comment below if you use Go modules)
+vendor/
+
+# Go workspace file (Go 1.18+)
+go.work
+go.work.sum
+
+# Go module files lock
+go.sum
+
+# Logs
+*.log
+
+# IDE and Editor folders
+.vscode/
+.idea/
+*.swp
+
+# Docker-related
+docker-compose.override.yml
+.env
+.env.local
+.env.*.local
+
+# MongoDB data and logs (if mapped locally)
+mongo-data/
+data/
+*.ns
+*.wt
+*.wtcrc
+diagnostic.data/
+journal/
+mongod.lock
+
+# Node modules (if any frontend code involved)
+node_modules/
+
+# OS-specific
+.DS_Store
+Thumbs.db
