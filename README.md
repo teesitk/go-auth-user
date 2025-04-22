@@ -35,7 +35,7 @@ This project follows the **Hexagonal Architecture** pattern:
 | GET    | `/users`   | Get users list | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`                                                      | `{code: 201, message: "success"}, data: [{ "id": "1", "name": "one", "email": "one@example.com" },{ "id": "2", "name": "two", "email": "two@example.com" }]}`                           |
 | POST    | `/users/create`   | Create a new user | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`   _Body_: `{ name:<name>, email:<email>, password:<password>}`                                                    | `{code: 201, message: "success"}`                           |
 | PUT    | `/users/update`   | Update user's name or email | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>  `    _Body_: `{id:<id>, name:<name>, email:<email>}`                                                    | `{code: 200, message: "success"}`                           |
-| POST    | `/users/delete`   | Create a new user | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`  _Body_: `{id:<id>}`                                                      | `{code: 200, message: "success"}`                           |
+| DELETE    | `/users/delete`   | Create a new user | ✅ Yes         | _Header_: `Authorization: Bearer <JWT_TOKEN>`  _Body_: `{id:<id>}`                                                      | `{code: 200, message: "success"}`                           |
 
 ---
 
