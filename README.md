@@ -14,6 +14,11 @@ This project follows the **Hexagonal Architecture** pattern:
 ### Setup Application
 `docker compose up --build`
 
+### Mongo DB
+- create database `go-auth-user`
+- initialize data in counters collection with  
+`{ "_id": "users", "seq": 0 }`
+
 ### Run Test and Coverage
 `go test ./... -coverprofile=coverage.out`  
 `go tool cover -html=coverage.out -o coverage.html`
